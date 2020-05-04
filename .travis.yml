@@ -4,7 +4,7 @@ language: node_js
 cache:
   yarn: true
 
-os: linux
+os: windows
 
 env:
   global:
@@ -16,7 +16,7 @@ before_script:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
 
 script:
-  - if [ "$JOB" = "test" ]; then make -j test-ci; fi
+  - yarn && yarn lerna bootstrap && yarn gulp build-no-bundle && yarn jest --runInBand babel-node babel-cli
   - if [ "$JOB" = "lint" ]; then make -j code-quality-ci; fi
   - if [ "$JOB" = "babel-parser-flow-tests" ]; then make -j test-flow-ci; fi
   - if [ "$JOB" = "babel-parser-typescript-tests" ]; then make -j test-typescript-ci; fi
@@ -26,12 +26,6 @@ matrix:
   fast_finish: true
   include:
     - node_js: "node"
-      env: JOB=lint
-    # We test the latest version on circleci
-    - node_js: "13"
-    # Move `windows` build to be the third since it is slow
-    - os: windows
-      node_js: "node"
       env:
         - JOB=test
         # https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/288/9
@@ -40,17 +34,6 @@ matrix:
         yarn: true
         directories:
           - $HOME/AppData/Local/Temp/chocolatey
-    # Continue node_js matrix
-    - node_js: "6"
-    - node_js: "12"
-    - node_js: "10"
-    - node_js: "8"
-    - node_js: "node"
-      env: JOB=babel-parser-flow-tests
-    - node_js: "node"
-      env: JOB=babel-parser-typescript-tests
-    - node_js: "node"
-      env: JOB=babel-parser-test262-tests
 
 notifications:
   slack:
