@@ -1,15 +1,21 @@
 git:
   depth: 5
 language: node_js
-cache:
-  yarn: true
-
 os: windows
+node_js:
+  - "13.13"
+  - "13.12"
+  - "14.1"
 
 env:
   global:
     - PATH=$HOME/.yarn/bin:$PATH
     - JOB=test
+    - YARN_GPG=no
+cache:
+  yarn: true
+  directories:
+    - $HOME/AppData/Local/Temp/chocolatey
 
 install: skip
 before_script:
@@ -24,16 +30,6 @@ script:
 
 matrix:
   fast_finish: true
-  include:
-    - node_js: "13"
-      env:
-        - JOB=test
-        # https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/288/9
-        - YARN_GPG=no
-      cache:
-        yarn: true
-        directories:
-          - $HOME/AppData/Local/Temp/chocolatey
 
 notifications:
   slack:
