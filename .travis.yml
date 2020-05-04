@@ -25,7 +25,7 @@ script:
 matrix:
   fast_finish: true
   include:
-    - node_js: "node"
+    - node_js: "13"
       env:
         - JOB=test
         # https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/288/9
