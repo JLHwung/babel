@@ -120,6 +120,7 @@
     "chrome": "64",
     "opera": "51",
     "edge": "79",
+    "firefox": "78",
     "safari": "11.1",
     "node": "10",
     "ios": "11.3",
