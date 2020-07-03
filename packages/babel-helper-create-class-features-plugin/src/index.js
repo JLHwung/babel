@@ -6,11 +6,7 @@ import {
   transformPrivateNamesUsage,
   buildFieldsInitNodes,
 } from "./fields";
-import {
-  hasOwnDecorators,
-  buildDecoratedClass,
-  hasDecorators,
-} from "./decorators";
+import { buildDecoratedClass, hasDecorators } from "./decorators";
 import { injectInitialization, extractComputedKeys } from "./misc";
 import {
   enableFeature,
@@ -18,10 +14,11 @@ import {
   FEATURES,
   isLoose,
 } from "./features";
+import { shouldSkipTransform, NATIVES, declareSupport } from "./targets.js";
 
 import pkg from "../package.json";
 
-export { FEATURES, injectInitialization };
+export { FEATURES, injectInitialization, NATIVES, declareSupport };
 
 // Note: Versions are represented as an integer. e.g. 7.1.5 is represented
 //       as 70000100005. This method is easier than using a semver-parsing
@@ -54,10 +51,12 @@ export function createClassFeaturePlugin({
 
         verifyUsedFeatures(path, this.file);
 
+        if (shouldSkipTransform(path, this.file)) return;
+
         const loose = isLoose(this.file, feature);
 
         let constructor;
-        let isDecorated = hasOwnDecorators(path.node);
+        const isDecorated = hasDecorators(path.node);
         const props = [];
         const elements = [];
         const computedPaths = [];
@@ -117,11 +116,7 @@ export function createClassFeaturePlugin({
               props.push(path);
             }
           }
-
-          if (!isDecorated) isDecorated = hasOwnDecorators(path.node);
         }
-
-        if (!props.length && !isDecorated) return;
 
         let ref;
 
