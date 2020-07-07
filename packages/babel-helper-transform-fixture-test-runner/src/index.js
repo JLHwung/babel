@@ -147,6 +147,7 @@ function run(task) {
   function getOpts(self) {
     const newOpts = merge(
       {
+        ast: true,
         cwd: path.dirname(self.loc),
         filename: self.loc,
         filenameRelative: self.filename,
