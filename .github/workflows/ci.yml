@@ -117,6 +117,10 @@ jobs:
       - name: Install
         run: |
           BABEL_ENV=test-legacy make -j bootstrap-only
+      - name: Downgrade Jest
+        if: matrix.node-version == '6' || matrix.node-version == '8'
+        run: |
+          yarn add --dev jest@24 babel-jest@24
       - uses: actions/download-artifact@v2
         with:
           name: babel-artifact
