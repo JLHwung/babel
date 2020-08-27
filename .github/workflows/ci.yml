@@ -59,6 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       YARN_NODE_LINKER: pnp # use pnp linker for better linking performance and stricter checks
+      YARN_ENABLE_GLOBAL_CACHE: false # Yarn will copy global cache to current cwd so rollup can resolve libraries
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
