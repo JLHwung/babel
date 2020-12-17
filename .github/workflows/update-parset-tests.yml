@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs: {}
   schedule:
-    - cron: "0 0 * * 0"
+    - cron: "*/2 * * * *"
 
 jobs:
   createPullRequest:
@@ -17,7 +17,7 @@ jobs:
           path: build/test262
       - name: Get latest test262 version
         id: test262
-        run: echo "::set-output sha1=$(sh ./scripts/parser-tests/get-test262-version.sh)"
+        run: echo "::set-output name=sha1::$(sh ./scripts/parser-tests/get-test262-version.sh)"
       - name: Update test262
         run: |
           echo ${{ steps.test262.outputs.sha1 }} | ./scripts/parser-tests/bump-test262-version.sh

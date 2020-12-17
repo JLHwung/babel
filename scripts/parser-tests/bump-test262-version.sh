@@ -4,4 +4,4 @@
 # sh ./scripts/parser-tests/get-test262-version.sh | sh ./scripts/parser-tests/bump-test262-version.sh
 
 set -e
-sed -E -i '' 's/^TEST262_COMMIT.+$/TEST262_COMMIT = '$(cat)'/' ./Makefile
+perl -i -pe 's/^TEST262_COMMIT.+$/TEST262_COMMIT = '$(cat)'/' ./Makefile

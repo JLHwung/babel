@@ -5,5 +5,5 @@
 
 set -e
 export GIT_DIR=./build/test262/.git
-git fetch
-git rev-parse origin/HEAD
+git fetch -q origin HEAD
+git rev-parse FETCH_HEAD
