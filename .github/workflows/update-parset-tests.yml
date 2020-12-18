@@ -54,7 +54,7 @@ jobs:
       - name: Create Pull Request
         uses: actions/github-script@v3
         with:
-          github-token: ${{ secrets.BOT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const base = process.env.GITHUB_REF.replace("/ref/heads/", "");
             const { data: prs } = await github.pulls.list({
