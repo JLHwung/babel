@@ -54,7 +54,7 @@ jobs:
       - name: Create Pull Request
         uses: actions/github-script@v3
         with:
-          github-token: ${{ secrets.BOT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const pr = await github.pulls.create({
               owner: context.repo.owner,
@@ -65,6 +65,8 @@ jobs:
               title: "Update test262",
               body: "Update test262 to [${{ steps.test262.outputs.sha1 }}](https://github.com/tc39/test262/commit/${{ steps.test262.outputs.sha1 }}).",
             });
+
+            console.log(pr);
 
             github.issues.addLabels({
               owner: context.repo.owner,
