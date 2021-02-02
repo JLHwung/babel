@@ -1,0 +1,58 @@
+---
+name: "\U0001F41B Bug Report"
+about: "If something isn't working as expected \U0001F914."
+title: ""
+labels: "i: bug, i: needs triage"
+assignees: ""
+issue_body: true
+inputs:
+  - type: description
+  - type: textarea
+    attributes:
+      label: Reproduction steps
+      required: false
+      description: "[REPL](https://babel.dev/repl), [Codesandbox](https://codesandbox.io/s/babel-repl-custom-plugin-7s08o?file=/src/index.js), or GitHub Repo. If a reproducible demo is not provided, it is very likely that your issue will be closed. Read [here](https://stackoverflow.com/help/mcve) for more guidance."
+      placeholder: "var your => (code) => here;"
+  - type: textarea
+    attributes:
+      label: Current behavior
+      required: true
+      description: A clear and concise description of the behavior.
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      required: true
+      description: A clear and concise description of what you expected to happen (or code).
+  - type: multi_select
+    attributes:
+      label: How you are using Babel?
+      required: true
+      choices:
+        - "@babel/cli"
+        - "@babel/node"
+        - "@babel/register"
+        - "parcel"
+        - "programmatic usage"
+        - "rollup"
+        - "webpack (babel-loader, create-react-app)"
+        - "other, please specify in 'Babel config'"
+  - type: textarea
+    attributes:
+      label: Babel config
+      required: true
+      description: "You babel config can be found in `babel.config.js`, `.babelrc` and @babel/cli command. If using Babel >= 7.12.0, you can also paste the output of `BABEL_SHOW_CONFIG_FOR='/path/to/your/js' npm build` here."
+  - type: textarea
+    attributes:
+      label: Environment
+      required: true
+      placeholder: Run `npx envinfo --preset babel` and paste the output here.
+  - type: textarea
+    attributes:
+      label: Possible solution
+      required: false
+      placeholder: If you have suggestions on a fix for the bug.
+  - type: textarea
+    attributes:
+      label: Additional context
+      required: false
+      placeholder: Add any other context about the problem here. Or a screenshot if applicable.
