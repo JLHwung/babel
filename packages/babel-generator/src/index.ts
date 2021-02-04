@@ -66,7 +66,9 @@ function normalizeOptions(code, opts): Format {
 
   if (!process.env.BABEL_8_BREAKING) {
     format.jsonCompatibleStrings = opts.jsonCompatibleStrings;
-    delete format.jsescOption.minimal;
+    if (opts.jsescOption?.minimal == null) {
+      delete format.jsescOption.minimal;
+    }
   }
 
   if (format.minified) {
