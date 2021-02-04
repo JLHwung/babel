@@ -43,13 +43,15 @@ export default declare(api => {
   return {
     name: "transform-unicode-escapes",
     manipulateOptions({ generatorOpts }) {
-      // Babel 8 will enable jsesc minimal mode by default, which outputs
-      // unescaped unicode string
-      if (!generatorOpts.jsescOption) {
-        generatorOpts.jsescOption = {};
+      if (process.env.BABEL_8_BREAKING) {
+        // Babel 8 will enable jsesc minimal mode by default, which outputs
+        // unescaped unicode string
+        if (!generatorOpts.jsescOption) {
+          generatorOpts.jsescOption = {};
+        }
+        // $FlowIgnore: Flow does not support logical assignment
+        generatorOpts.jsescOption.minimal ??= false;
       }
-      // $FlowIgnore: Flow does not support logical assignment
-      generatorOpts.jsescOption.minimal ??= false;
     },
     visitor: {
       Identifier(path) {
