@@ -102,3 +102,20 @@ export function isIdentifierName(name: string): boolean {
   }
   return !isFirst;
 }
+
+export function isIdentifierName2(name: string): boolean {
+  let isFirst = true;
+  for (let i = 0; i < name.length; ) {
+    const cp = name.codePointAt(i);
+    if (isFirst) {
+      isFirst = false;
+      if (!isIdentifierStart(cp)) {
+        return false;
+      }
+    } else if (!isIdentifierChar(cp)) {
+      return false;
+    }
+    i += cp > 0xffff ? 2 : 1;
+  }
+  return !isFirst;
+}

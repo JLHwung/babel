@@ -2,6 +2,7 @@ export {
   isIdentifierName,
   isIdentifierChar,
   isIdentifierStart,
+  isIdentifierName2,
 } from "./identifier";
 export {
   isReservedWord,
