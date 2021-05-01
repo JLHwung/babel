@@ -26,6 +26,10 @@ describe("@babel/highlight", function () {
         expect(result.length).toBeGreaterThan(stripped.length);
         expect(stripped).toBe(code);
       });
+
+      it("supports empty code", function () {
+        expect(highlight("")).toBe("");
+      });
     });
 
     describe("when colors are not supported", function () {
