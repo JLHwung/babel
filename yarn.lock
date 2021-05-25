@@ -14,6 +14,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel-baseline/types@npm:@babel/types@^7.14.2":
+  version: 7.14.2
+  resolution: "@babel/types@npm:7.14.2"
+  dependencies:
+    "@babel/helper-validator-identifier": ^7.14.0
+    to-fast-properties: ^2.0.0
+  checksum: 34893ac415826cd2ddead0511be9c3cb876bf626148b00b0a471c4630b193939ba46a9bf9d8b2be88e46fceb3ae9204ed7488ceb6a08a67550211d40df65a7c7
+  languageName: node
+  linkType: hard
+
 "@babel-internal/runtime-integration-rollup@workspace:test/runtime-integration/rollup":
   version: 0.0.0-use.local
   resolution: "@babel-internal/runtime-integration-rollup@workspace:test/runtime-integration/rollup"
@@ -3578,9 +3588,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@babel/types@workspace:packages/babel-types"
   dependencies:
+    "@babel-baseline/types": "npm:@babel/types@^7.14.2"
     "@babel/generator": "workspace:*"
     "@babel/helper-validator-identifier": "workspace:^7.14.0"
     "@babel/parser": "workspace:*"
+    benchmark: ^2.1.4
     chalk: ^4.1.0
     to-fast-properties: ^2.0.0
   languageName: unknown

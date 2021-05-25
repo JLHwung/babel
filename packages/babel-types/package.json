@@ -28,8 +28,10 @@
     "to-fast-properties": "^2.0.0"
   },
   "devDependencies": {
+    "@babel-baseline/types": "npm:@babel/types@^7.14.2",
     "@babel/generator": "workspace:*",
     "@babel/parser": "workspace:*",
+    "benchmark": "^2.1.4",
     "chalk": "^4.1.0"
   }
 }
