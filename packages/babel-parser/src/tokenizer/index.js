@@ -16,7 +16,6 @@ import {
   lineBreakG,
   isNewLine,
   isWhitespace,
-  skipWhiteSpace,
 } from "../util/whitespace";
 import State from "./state";
 import type { LookaheadState } from "./state";
@@ -231,10 +230,34 @@ export default class Tokenizer extends ParserErrors {
   }
 
   nextTokenStartSince(pos: number): number {
-    skipWhiteSpace.lastIndex = pos;
-    const skip = skipWhiteSpace.exec(this.input);
-    // $FlowIgnore: The skipWhiteSpace ensures to match any string
-    return pos + skip[0].length;
+    for (; pos < this.length; ) {
+      const ch = this.input.charCodeAt(pos);
+      if (isWhitespace(ch) || isNewLine(ch)) {
+        ++pos;
+      } else if (ch === charCodes.slash) {
+        const nextCh = this.input.charCodeAt(pos + 1);
+        if (nextCh === charCodes.slash) {
+          pos += 2;
+          let ch;
+          do {
+            ch = this.input.charCodeAt(pos);
+          } while (!isNewLine(ch) && ++pos < this.length);
+        } else if (nextCh === charCodes.asterisk) {
+          const end = this.input.indexOf("*/", pos + 2);
+          if (end === -1) {
+            this.raise(pos, Errors.UnterminatedComment);
+            return pos;
+          } else {
+            pos = end + 2;
+          }
+        } else {
+          return pos;
+        }
+      } else {
+        return pos;
+      }
+    }
+    return pos;
   }
 
   lookaheadCharCode(): number {
