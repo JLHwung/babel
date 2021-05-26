@@ -107,7 +107,7 @@ module.exports = function (api) {
       envOpts.debug = true;
     // fall through
     case "test":
-      targets = { node: "current" };
+      targets = { node: "6" };
       break;
   }
 
