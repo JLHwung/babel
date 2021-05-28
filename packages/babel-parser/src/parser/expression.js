@@ -1246,6 +1246,7 @@ export default class ExpressionParser extends LValParser {
         return node;
       }
 
+      case tt.modulo:
       case tt.hash: {
         node = this.maybeParseTopicReference();
         if (node) {
