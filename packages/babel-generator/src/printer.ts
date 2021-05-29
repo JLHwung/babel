@@ -33,7 +33,7 @@ export type Format = {
    * For use with the Hack-style pipe operator.
    * Changes what token is used for pipe bodies’ topic references.
    */
-  topicToken?: "#";
+  topicToken?: "%" | "#";
 };
 
 class Printer {

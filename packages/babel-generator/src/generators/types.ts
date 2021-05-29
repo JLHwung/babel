@@ -240,6 +240,10 @@ export function DecimalLiteral(this: Printer, node: t.DecimalLiteral) {
 export function TopicReference(this: Printer) {
   const { topicToken } = this.format;
   switch (topicToken) {
+    case "%":
+      this.token("%");
+      break;
+
     case "#":
       this.token("#");
       break;
