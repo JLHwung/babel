@@ -1,1 +1,1 @@
-value |> (variable %= %);
+variable %= value |> %;
