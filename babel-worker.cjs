@@ -19,7 +19,7 @@ function needCompile(src, dest) {
   return srcStat.mtimeMs > destStat.mtimeMs;
 }
 
-exports.transform = function (src, dest) {
+module.exports = function ({ src, dest }) {
   mkdirSync(dirname(dest), { recursive: true });
   if (!needCompile(src, dest)) {
     return;

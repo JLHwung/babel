@@ -19,6 +19,8 @@ import { terser as rollupTerser } from "rollup-plugin-terser";
 import _rollupDts from "rollup-plugin-dts";
 const { default: rollupDts } = _rollupDts;
 import { Worker as JestWorker } from "jest-worker";
+import Piscina from "piscina";
+
 import glob from "glob";
 
 import rollupBabelSource from "./scripts/rollup-plugin-babel-source.js";
@@ -219,12 +221,9 @@ function createWorker(useWorker) {
   if (numWorkers === 0 || !useWorker) {
     return require("./babel-worker.cjs");
   }
-  const worker = new JestWorker(require.resolve("./babel-worker.cjs"), {
-    numWorkers,
-    exposedMethods: ["transform"],
+  const worker = new Piscina({
+    filename: require.resolve("./babel-worker.cjs"),
   });
-  worker.getStdout().on("data", chunk => process.stdout.write(chunk));
-  worker.getStderr().on("data", chunk => process.stderr.write(chunk));
   return worker;
 }
 
@@ -247,13 +246,9 @@ async function buildBabel(useWorker, ignore = []) {
   for (const file of files) {
     // @example ./packages/babel-parser/src/index.js
     const dest = "./" + mapSrcToLib(file.slice(2));
-    promises.push(worker.transform(file, dest));
+    promises.push(worker.run({ src: file, dest }));
   }
-  return Promise.all(promises).finally(() => {
-    if (useWorker) {
-      worker.end();
-    }
-  });
+  return Promise.all(promises);
 }
 
 /**

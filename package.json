@@ -61,6 +61,7 @@
     "lint-staged": "^9.2.0",
     "lodash": "^4.17.21",
     "mergeiterator": "^1.2.5",
+    "piscina": "^3.1.0",
     "prettier": "2.3.0",
     "rollup": "^2.47.0",
     "rollup-plugin-dts": "^2.0.0",
