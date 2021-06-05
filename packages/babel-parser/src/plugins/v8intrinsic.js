@@ -1,7 +1,6 @@
 import type Parser from "../parser";
 import { types as tt } from "../tokenizer/types";
 import * as N from "../types";
-import { Errors } from "../parser/error";
 
 export default (superClass: Class<Parser>): Class<Parser> =>
   class extends superClass {
@@ -28,28 +27,21 @@ export default (superClass: Class<Parser>): Class<Parser> =>
           "pipelineOperator",
           "proposal",
         );
-
         if (pipeProposal) {
-          // A pipe-operator proposal is active.
-          const moduloTopicTokenIsActive = this.testTopicReferenceConfiguration(
+          // A pipe-operator proposal is active,
+          // although its configuration might not match `%` as a topic token.
+          // If the pipe-operator plugin’s configuration matches the current token’s type,
+          // then this will return `node`, will have been finished as a topic reference.
+          // Otherwise, this will throw a `PipeTopicUnconfiguredToken` error.
+          return this.finishTopicReference(
+            node,
+            start,
             pipeProposal,
             tt.modulo,
           );
-
-          if (moduloTopicTokenIsActive) {
-            // The token matches the plugin’s configuration.
-            // The token is therefore a topic reference.
-            return this.finishTopicReferenceNode(node, start, pipeProposal);
-          } else {
-            // The token does not match the plugin’s configuration.
-            throw this.raise(
-              start,
-              Errors.PipeTopicUnconfiguredToken,
-              tt.modulo.label,
-            );
-          }
         } else {
           // A pipe-operator proposal is not active.
+          // Throw a fatal syntax error.
           this.unexpected(start);
         }
       }
