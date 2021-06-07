@@ -1,7 +1,0 @@
-{
-  "plugins": [
-    ["pipelineOperator", { "proposal": "hack", "topicToken": "%" }],
-    "placeholders"
-  ],
-  "throws": "Unexpected token (1:8)"
-}
