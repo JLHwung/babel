@@ -1951,4 +1951,10 @@ describe("verify", () => {
       { "no-unused-vars": 1, "no-undef": 1 },
     );
   });
+
+  it("max-len { ignoreTemplateLiterals } should work", () => {
+    verifyAndAssertMessages("const a = `" + " ".repeat(80) + "`;", {
+      "max-len": [1, { code: 80, ignoreTemplateLiterals: true }],
+    });
+  });
 });
