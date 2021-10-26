@@ -110,7 +110,6 @@ module.exports = function (api) {
     case "test":
       targets = { node: "current" };
       needsPolyfillsForOldNode = true;
-      dynamicESLintVersionCheck = true;
       break;
     case "development":
       envOpts.debug = true;
