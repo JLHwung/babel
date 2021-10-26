@@ -72,10 +72,7 @@ jobs:
           key: yarn-${{ hashFiles('yarn.lock') }}
       - name: Generate coverage report
         run: |
-          yarn install
-          ./node_modules/.bin/eslint --version
-          make build
-          yarn jest eslint/babel-eslint-parser
+          make -j test-ci-coverage
       # - name: Upload coverage report
       #   uses: codecov/codecov-action@v1
 
