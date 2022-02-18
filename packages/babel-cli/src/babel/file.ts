@@ -191,15 +191,13 @@ export default async function ({
   }
 
   async function files(filenames: Array<string>): Promise<void> {
+    const initialBuild = async () => {
+      if (!cliOptions.skipInitialBuild) {
+        await walk(filenames);
+      }
+    };
     if (cliOptions.watch) {
       watcher.enable({ enableGlobbing: false });
-    }
-
-    if (!cliOptions.skipInitialBuild) {
-      await walk(filenames);
-    }
-
-    if (cliOptions.watch) {
       filenames.forEach(watcher.watch);
 
       watcher.onFilesChange((changes, event, cause) => {
@@ -218,6 +216,10 @@ export default async function ({
           console.error(err);
         });
       });
+
+      watcher.onReady(initialBuild);
+    } else {
+      await initialBuild();
     }
   }
 

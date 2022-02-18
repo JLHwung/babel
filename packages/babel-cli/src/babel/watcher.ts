@@ -51,16 +51,30 @@ export function onFilesChange(
     );
   }
 
-  watcher.on("all", (event, filename) => {
-    if (event !== "change" && event !== "add") return;
-
+  const listenerFactory = event => filename => {
     const absoluteFile = path.resolve(filename);
     callback(
       [absoluteFile, ...(depToFiles.get(absoluteFile) ?? [])],
       event,
       absoluteFile,
     );
-  });
+  };
+
+  watcher.on("add", listenerFactory("add"));
+  watcher.on("change", listenerFactory("change"));
+}
+
+/**
+ * Call @param callback when watcher is ready for changes.
+ */
+export function onReady(callback: () => void): void {
+  if (!isWatchMode) {
+    throw new Error(
+      "Internal Babel error: .onReady called when not in watch mode.",
+    );
+  }
+
+  watcher.on("ready", callback);
 }
 
 export function updateExternalDependencies(

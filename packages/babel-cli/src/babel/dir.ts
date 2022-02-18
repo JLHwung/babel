@@ -149,31 +149,32 @@ export default async function ({
     startTime = null;
   }, 100);
 
-  if (cliOptions.watch) watcher.enable({ enableGlobbing: true });
+  const initialBuild = async () => {
+    if (!cliOptions.skipInitialBuild) {
+      if (cliOptions.deleteDirOnStart) {
+        util.deleteDir(cliOptions.outDir);
+      }
 
-  if (!cliOptions.skipInitialBuild) {
-    if (cliOptions.deleteDirOnStart) {
-      util.deleteDir(cliOptions.outDir);
+      fs.mkdirSync(cliOptions.outDir, { recursive: true });
+
+      startTime = process.hrtime();
+
+      for (const filename of cliOptions.filenames) {
+        // compiledFiles is just incremented without reading its value, so we
+        // don't risk race conditions.
+        // eslint-disable-next-line require-atomic-updates
+        compiledFiles += await handle(filename);
+      }
+
+      if (!cliOptions.quiet) {
+        logSuccess();
+        logSuccess.flush();
+      }
     }
-
-    fs.mkdirSync(cliOptions.outDir, { recursive: true });
-
-    startTime = process.hrtime();
-
-    for (const filename of cliOptions.filenames) {
-      // compiledFiles is just incremented without reading its value, so we
-      // don't risk race conditions.
-      // eslint-disable-next-line require-atomic-updates
-      compiledFiles += await handle(filename);
-    }
-
-    if (!cliOptions.quiet) {
-      logSuccess();
-      logSuccess.flush();
-    }
-  }
+  };
 
   if (cliOptions.watch) {
+    watcher.enable({ enableGlobbing: true });
     // This, alongside with debounce, allows us to only log
     // when we are sure that all the files have been compiled.
     let processing = 0;
@@ -242,5 +243,9 @@ export default async function ({
       processing--;
       if (processing === 0 && !cliOptions.quiet) logSuccess();
     });
+
+    watcher.onReady(initialBuild);
+  } else {
+    await initialBuild();
   }
 }
