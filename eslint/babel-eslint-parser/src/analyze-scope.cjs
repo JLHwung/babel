@@ -1,8 +1,10 @@
 const escope = require("eslint-scope");
-const { Definition } = require("eslint-scope/lib/definition");
-const OriginalPatternVisitor = require("eslint-scope/lib/pattern-visitor");
-const OriginalReferencer = require("eslint-scope/lib/referencer");
 const { getKeys: fallback } = require("eslint-visitor-keys");
+const {
+  Definition,
+  PatternVisitor: OriginalPatternVisitor,
+  Referencer: OriginalReferencer,
+} = escope;
 
 let visitorKeysMap;
 function getVisitorValues(nodeType, client) {

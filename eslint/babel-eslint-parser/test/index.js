@@ -1,5 +1,5 @@
 import path from "path";
-import escope from "eslint-scope";
+import * as escope from "eslint-scope";
 import unpad from "dedent";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
