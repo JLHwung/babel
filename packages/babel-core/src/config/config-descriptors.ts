@@ -126,35 +126,31 @@ export function createUncachedDescriptors(
   // The returned result here is cached to represent a config object in
   // memory, so we build and memoize the descriptors to ensure the same
   // values are returned consistently.
-  let plugins: UnloadedDescriptor[];
-  let presets: UnloadedDescriptor[];
+  let pluginsGen: gensync.Handler<UnloadedDescriptor[]>;
+  let presetsGen: gensync.Handler<UnloadedDescriptor[]>;
 
   return {
     options: optionsWithResolvedBrowserslistConfigFile(options, dirname),
     *plugins() {
-      if (!plugins) {
-        const _plugins = yield* createPluginDescriptors(
+      if (!pluginsGen) {
+        pluginsGen = createPluginDescriptors(
           options.plugins || [],
           dirname,
           alias,
         );
-        // check plugins again to avoid race conditions
-        plugins ??= _plugins;
       }
-      return plugins;
+      return yield* pluginsGen;
     },
     *presets() {
-      if (!presets) {
-        const _presets = yield* createPresetDescriptors(
+      if (!presetsGen) {
+        presetsGen = createPresetDescriptors(
           options.presets || [],
           dirname,
           alias,
           !!options.passPerPreset,
         );
-        // check presets again to avoid race conditions
-        presets ??= _presets;
       }
-      return presets;
+      return yield* presetsGen;
     },
   };
 }
