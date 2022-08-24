@@ -173,7 +173,7 @@ export function expressionStatement(
 }
 export function file(
   program: t.Program,
-  comments: Array<t.CommentBlock | t.CommentLine> | null = null,
+  comments: Array<t.CommentBlock | t.CommentLine> = [],
   tokens: Array<any> | null = null,
 ): t.File {
   return validateNode<t.File>({
@@ -798,7 +798,7 @@ export function taggedTemplateExpression(
   });
 }
 export function templateElement(
-  value: { raw: string; cooked?: string },
+  value: { raw: string; cooked?: string | null },
   tail: boolean = false,
 ): t.TemplateElement {
   return validateNode<t.TemplateElement>({

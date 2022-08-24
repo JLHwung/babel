@@ -5,7 +5,7 @@ interface BaseComment {
   value: string;
   start?: number;
   end?: number;
-  loc?: SourceLocation;
+  loc?: SourceLocation | null;
   // generator will skip the comment if ignore is true
   ignore?: boolean;
   type: "CommentBlock" | "CommentLine";
@@ -421,7 +421,7 @@ export interface ExpressionStatement extends BaseNode {
 export interface File extends BaseNode {
   type: "File";
   program: Program;
-  comments?: Array<CommentBlock | CommentLine> | null;
+  comments: Array<CommentBlock | CommentLine>;
   tokens?: Array<any> | null;
 }
 

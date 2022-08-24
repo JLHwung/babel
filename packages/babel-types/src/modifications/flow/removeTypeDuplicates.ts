@@ -61,7 +61,9 @@ export default function removeTypeDuplicates(
       const name = getQualifiedName(node.id);
 
       if (generics.has(name)) {
-        let existing: t.Flow = generics.get(name);
+        let existing: t.Flow | null | undefined = generics.get(
+          name,
+        ) as t.GenericTypeAnnotation;
         if (existing.typeParameters) {
           if (node.typeParameters) {
             existing.typeParameters.params.push(...node.typeParameters.params);

@@ -298,7 +298,7 @@ defineType("File", {
             each: { oneOfNodeTypes: ["CommentBlock", "CommentLine"] },
           })
         : assertEach(assertNodeType("CommentBlock", "CommentLine")),
-      optional: true,
+      default: [],
     },
     tokens: {
       // todo(ts): add Token type

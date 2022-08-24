@@ -36,7 +36,7 @@ function getBindingIdentifiers(
   duplicates?: boolean,
   outerOnly?: boolean,
 ): Record<string, t.Identifier> | Record<string, Array<t.Identifier>> {
-  const search: t.Node[] = [].concat(node);
+  const search = ([] as (t.Node | null | undefined)[]).concat(node);
   const ids = Object.create(null);
 
   while (search.length) {

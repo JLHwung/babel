@@ -5,11 +5,7 @@ import {
 } from "../definitions";
 import type * as t from "..";
 
-export default function validate(
-  node: t.Node | undefined | null,
-  key: string,
-  val: any,
-): void {
+export default function validate(node: t.Node, key: string, val: any): void {
   if (!node) return;
 
   const fields = NODE_FIELDS[node.type];
@@ -21,7 +17,7 @@ export default function validate(
 }
 
 export function validateField(
-  node: t.Node | undefined | null,
+  node: t.Node,
   key: string,
   val: any,
   field: FieldOptions | undefined | null,
@@ -33,7 +29,7 @@ export function validateField(
 }
 
 export function validateChild(
-  node: t.Node | undefined | null,
+  node: t.Node,
   key: string,
   val?: t.Node | undefined | null,
 ) {

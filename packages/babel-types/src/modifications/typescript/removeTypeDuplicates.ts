@@ -62,7 +62,7 @@ export default function removeTypeDuplicates(
       const name = getQualifiedName(node.typeName);
 
       if (generics.has(name)) {
-        let existing: t.TypeScript = generics.get(name);
+        let existing: t.TypeScript = generics.get(name) as t.TSTypeReference;
         if (existing.typeParameters) {
           if (node.typeParameters) {
             existing.typeParameters.params.push(...node.typeParameters.params);

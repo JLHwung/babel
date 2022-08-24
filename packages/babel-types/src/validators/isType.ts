@@ -6,10 +6,7 @@ export default function isType<T extends t.Node["type"]>(
   targetType: T,
 ): nodeType is T;
 
-export default function isType(
-  nodeType: string | null | undefined,
-  targetType: string,
-): boolean;
+export default function isType(nodeType: string, targetType: string): boolean;
 
 /**
  * Test if a `nodeType` is a `targetType` or if `targetType` is an alias of `nodeType`.

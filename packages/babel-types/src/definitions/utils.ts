@@ -54,7 +54,7 @@ export type Validator = (
   ((node: t.Node, key: string, val: any) => void);
 
 export type FieldOptions = {
-  default?: string | number | boolean | [];
+  default?: string | number | boolean | null | [];
   optional?: boolean;
   deprecated?: boolean;
   validate?: Validator;
@@ -291,7 +291,7 @@ export function defineAliasedType(...aliases: string[]) {
       defined ??= [];
       opts.aliases = defined;
     }
-    const additional = aliases.filter(a => !defined.includes(a));
+    const additional = aliases.filter(a => !defined!.includes(a));
     defined.unshift(...additional);
     defineType(type, opts);
   };

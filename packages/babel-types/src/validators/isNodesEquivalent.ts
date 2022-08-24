@@ -4,10 +4,9 @@ import type * as t from "..";
 /**
  * Check if two nodes are equivalent
  */
-export default function isNodesEquivalent<T extends Partial<t.Node>>(
-  a: T,
-  b: any,
-): b is T {
+export default function isNodesEquivalent<
+  T extends Partial<t.Node> & { type: t.Node["type"] },
+>(a: T, b: any): b is T {
   if (
     typeof a !== "object" ||
     typeof b !== "object" ||

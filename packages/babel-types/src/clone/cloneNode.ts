@@ -113,7 +113,7 @@ function cloneNodeInternal<T extends t.Node>(
   }
   if (has(node, "leadingComments")) {
     newNode.leadingComments = maybeCloneComments(
-      node.leadingComments,
+      node.leadingComments!,
       deep,
       withoutLoc,
       commentsCache,
@@ -121,7 +121,7 @@ function cloneNodeInternal<T extends t.Node>(
   }
   if (has(node, "innerComments")) {
     newNode.innerComments = maybeCloneComments(
-      node.innerComments,
+      node.innerComments!,
       deep,
       withoutLoc,
       commentsCache,
@@ -129,7 +129,7 @@ function cloneNodeInternal<T extends t.Node>(
   }
   if (has(node, "trailingComments")) {
     newNode.trailingComments = maybeCloneComments(
-      node.trailingComments,
+      node.trailingComments!,
       deep,
       withoutLoc,
       commentsCache,

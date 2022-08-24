@@ -7,6 +7,7 @@ export default function inherit<
   if (child && parent) {
     // @ts-expect-error Could further refine key definitions
     child[key] = Array.from(
+      // @ts-expect-error key must index child and parent
       new Set([].concat(child[key], parent[key]).filter(Boolean)),
     );
   }

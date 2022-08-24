@@ -42,7 +42,7 @@ interface BaseComment {
   value: string;
   start?: number;
   end?: number;
-  loc?: SourceLocation;
+  loc?: SourceLocation | null;
   // generator will skip the comment if ignore is true
   ignore?: boolean;
   type: "CommentBlock" | "CommentLine";
