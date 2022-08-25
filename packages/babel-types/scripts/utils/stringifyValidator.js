@@ -43,10 +43,10 @@ export default function stringifyValidator(validator, nodePrefix) {
           if (propertyDefinition.validate) {
             const isOptional =
               propertyDefinition.optional || propertyDefinition.default != null;
+            const valueType = stringifyValidator(propertyDefinition.validate);
             return (
               shapeKey +
-              (isOptional ? "?: " : ": ") +
-              stringifyValidator(propertyDefinition.validate)
+              (isOptional ? `?: ${valueType} | null` : `: ${valueType}`)
             );
           }
           return null;
