@@ -5947,7 +5947,7 @@ __metadata:
     shelljs: ^0.8.5
     test262-stream: ^1.4.0
     through2: ^4.0.0
-    typescript: 4.8.0-dev.20220527
+    typescript: 4.8.0-dev.20220528
   dependenciesMeta:
     core-js:
       built: false
@@ -14762,23 +14762,23 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.8.0-dev.20220527":
-  version: 4.8.0-dev.20220527
-  resolution: "typescript@npm:4.8.0-dev.20220527"
+"typescript@npm:4.8.0-dev.20220528":
+  version: 4.8.0-dev.20220528
+  resolution: "typescript@npm:4.8.0-dev.20220528"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 2585fb636dfd28ffd92109387fceda6101789ffa70ddf12f591b142074e2f11e4da9fb22909507379978561b758a96c721f128ed91320bdddd3b633b084dba2a
+  checksum: 844e116adffba06fc2a34d52494d7a7b18c7319f2db2a54426b649947f38e62642cd1d17a64014ba157bf2f3ebda5b24a8746821559fb3b3d813e85e50183017
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.8.0-dev.20220527#~builtin<compat/typescript>":
-  version: 4.8.0-dev.20220527
-  resolution: "typescript@patch:typescript@npm%3A4.8.0-dev.20220527#~builtin<compat/typescript>::version=4.8.0-dev.20220527&hash=493e53"
+"typescript@patch:typescript@4.8.0-dev.20220528#~builtin<compat/typescript>":
+  version: 4.8.0-dev.20220528
+  resolution: "typescript@patch:typescript@npm%3A4.8.0-dev.20220528#~builtin<compat/typescript>::version=4.8.0-dev.20220528&hash=493e53"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: bf9c4578d2a09d374de228ebb383c171f8c69dd3c0d81186e0d7e866e18e706aad3ae7452807094a35e48ae9e21a96d2477b4b0bb7a88c8ce16097c03ce492fd
+  checksum: 5c3d45eda8e64088cc3086ee1b86eb6c60fb2a31f4e8bffdd816088d0c3bbbcf1783b964e486d466a3000b34f614398f0b24fdaca3fc9d2b58c53217faea57c3
   languageName: node
   linkType: hard
 
