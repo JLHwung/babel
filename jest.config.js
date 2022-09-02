@@ -16,7 +16,7 @@ if (!supportsESMAndJestLightRunner) {
 }
 
 module.exports = {
-  runner: supportsESMAndJestLightRunner ? "jest-light-runner" : "jest-runner",
+  runner: "jest-runner",
 
   snapshotFormat: { escapeString: true, printBasicPrototype: true },
   collectCoverageFrom: [
