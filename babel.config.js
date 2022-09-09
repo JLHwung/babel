@@ -301,7 +301,6 @@ module.exports = function (api) {
   // we need to do this as long as we do not test everything from source
   if (includeCoverage) {
     config.auxiliaryCommentBefore = "istanbul ignore next";
-    config.plugins.push("babel-plugin-istanbul");
   }
 
   return config;
