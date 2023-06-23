@@ -33,6 +33,9 @@ cd /tmp
 npx react-native init rnbabel
 cd rnbabel
 
+# list @babel/traverse
+npm ls @babel/traverse
+
 # check if @babel/traverse.cache.path is writable
 node -e "console.log(Object.getOwnPropertyDescriptor(require('@babel/traverse').default.cache, 'path'))"
 
