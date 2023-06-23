@@ -33,13 +33,6 @@ cd /tmp
 npx react-native init rnbabel
 cd rnbabel
 
-# list @babel/traverse
-npm ls @babel/traverse
-
-# print @babel/traverse/lib/
-cat node_modules/@babel/traverse/lib/index.js
-cat node_modules/@babel/traverse/lib/cache.js
-
 # check if @babel/traverse.cache.path is writable
 node -e "console.log(Object.getOwnPropertyDescriptor(require('@babel/traverse').default.cache, 'path'))"
 
@@ -49,6 +42,8 @@ if [ "$BABEL_8_BREAKING" = true ] ; then
   npx replace '(?=\[require\("@babel/plugin-syntax-flow")' '//' node_modules/metro-react-native-babel-preset/src/configs/main.js
   # https://github.com/facebook/metro/blob/2c16fa67/packages/metro-react-native-babel-preset/src/configs/main.js#L169
   npx replace '(?=plugins:.*?flow-strip-types)' 'exclude: [isTypeScriptSource, isTSXSource],' node_modules/metro-react-native-babel-preset/src/configs/main.js
+  npx replace '_traverse.default.cache.clearPath();' '//' node_modules/metro-source-map/src/generateFunctionMap.js
+  npx replace '_traverse.default.cache.path = previousCache;' '//' node_modules/metro-source-map/src/generateFunctionMap.js
 fi
 
 # Build the project
