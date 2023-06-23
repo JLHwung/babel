@@ -33,6 +33,9 @@ cd /tmp
 npx react-native init rnbabel
 cd rnbabel
 
+# check if @babel/traverse.cache.path is writable
+node -e "console.log(Object.getOwnPropertyDescriptor(require('@babel/traverse').default.cache, 'path'))"
+
 if [ "$BABEL_8_BREAKING" = true ] ; then
   # metro-react-native-babel-preset unconditionally enables the Flow plugin, even on TS files.
   # https://github.com/facebook/metro/blob/2c16fa67/packages/metro-react-native-babel-preset/src/configs/main.js#L25
