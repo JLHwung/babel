@@ -26,7 +26,10 @@ describeESM("usage from cjs", () => {
   it("lazy plugin required", async () => {
     expect(await run("lazy-plugin-required.cjs")).toMatchInlineSnapshot(`
       Object {
-        "stderr": "",
+        "stderr": "Browserslist: caniuse-lite is outdated. Please run:
+        npx update-browserslist-db@latest
+        Why you should do it regularly: https://github.com/browserslist/update-db#readme
+      ",
         "stdout": "\\"Replaced!\\";
       ",
       }
@@ -36,7 +39,10 @@ describeESM("usage from cjs", () => {
   it("lazy plugin as config string", async () => {
     expect(await run("lazy-plugin-as-string.cjs")).toMatchInlineSnapshot(`
       Object {
-        "stderr": "",
+        "stderr": "Browserslist: caniuse-lite is outdated. Please run:
+        npx update-browserslist-db@latest
+        Why you should do it regularly: https://github.com/browserslist/update-db#readme
+      ",
         "stdout": "\\"Replaced!\\";
       ",
       }
@@ -53,29 +59,38 @@ describeESM("usage from cjs", () => {
   it("eager plugin required after dynamic esm import", async () => {
     expect(await run("eager-plugin-required-after-dynamic-esm-import.cjs"))
       .toMatchInlineSnapshot(`
-        Object {
-          "stderr": "",
-          "stdout": "\\"Replaced!\\";
-        ",
-        }
-      `);
+      Object {
+        "stderr": "Browserslist: caniuse-lite is outdated. Please run:
+        npx update-browserslist-db@latest
+        Why you should do it regularly: https://github.com/browserslist/update-db#readme
+      ",
+        "stdout": "\\"Replaced!\\";
+      ",
+      }
+    `);
   });
 
   it("eager plugin required after static esm import", async () => {
     expect(await run("eager-plugin-required-after-static-esm-import.mjs"))
       .toMatchInlineSnapshot(`
-        Object {
-          "stderr": "",
-          "stdout": "\\"Replaced!\\";
-        ",
-        }
-      `);
+      Object {
+        "stderr": "Browserslist: caniuse-lite is outdated. Please run:
+        npx update-browserslist-db@latest
+        Why you should do it regularly: https://github.com/browserslist/update-db#readme
+      ",
+        "stdout": "\\"Replaced!\\";
+      ",
+      }
+    `);
   });
 
   it("eager plugin as config string", async () => {
     expect(await run("eager-plugin-as-string.cjs")).toMatchInlineSnapshot(`
       Object {
-        "stderr": "",
+        "stderr": "Browserslist: caniuse-lite is outdated. Please run:
+        npx update-browserslist-db@latest
+        Why you should do it regularly: https://github.com/browserslist/update-db#readme
+      ",
         "stdout": "\\"Replaced!\\";
       ",
       }
@@ -92,22 +107,28 @@ describeESM("usage from cjs", () => {
   it("transformSync after dynamic esm import", async () => {
     expect(await run("transform-sync-after-dynamic-esm-import.cjs"))
       .toMatchInlineSnapshot(`
-        Object {
-          "stderr": "",
-          "stdout": "REPLACE_ME;
-        ",
-        }
-      `);
+      Object {
+        "stderr": "Browserslist: caniuse-lite is outdated. Please run:
+        npx update-browserslist-db@latest
+        Why you should do it regularly: https://github.com/browserslist/update-db#readme
+      ",
+        "stdout": "REPLACE_ME;
+      ",
+      }
+    `);
   });
 
   it("transformSync after static esm import", async () => {
     expect(await run("transform-sync-after-static-esm-import.mjs"))
       .toMatchInlineSnapshot(`
-        Object {
-          "stderr": "",
-          "stdout": "REPLACE_ME;
-        ",
-        }
-      `);
+      Object {
+        "stderr": "Browserslist: caniuse-lite is outdated. Please run:
+        npx update-browserslist-db@latest
+        Why you should do it regularly: https://github.com/browserslist/update-db#readme
+      ",
+        "stdout": "REPLACE_ME;
+      ",
+      }
+    `);
   });
 });
