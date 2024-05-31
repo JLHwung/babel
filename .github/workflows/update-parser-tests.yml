@@ -37,6 +37,7 @@ jobs:
         run: |
           yarn install --immutable --mode=skip-build
           yarn gulp build-rollup
+          cat ./packages/babel-parser/lib/index.js
       - name: Update test262 allow list
         run: |
           make test-test262-update-allowlist
