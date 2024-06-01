@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import colors from "picocolors";
-import { parse as parser } from "../../../packages/babel-parser/lib/index.js";
+import * as parser from "../../../packages/babel-parser/lib/index.js";
 
 const dot = colors.gray(".");
 
@@ -46,7 +46,7 @@ class TestRunner {
 
   runTest(test) {
     try {
-      this.parse(test, parser);
+      this.parse(test, parser.parse);
       test.actualError = false;
     } catch (err) {
       test.actualError = true;
