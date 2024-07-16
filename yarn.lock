@@ -605,10 +605,9 @@ __metadata:
     "@babel/compat-data": "workspace:^"
     "@babel/helper-plugin-test-runner": "workspace:^"
     "@babel/helper-validator-option": "workspace:^"
-    "@types/lru-cache": "npm:^5.1.1"
     "@types/semver": "npm:^5.5.0"
     browserslist: "npm:^4.23.1"
-    lru-cache: "condition:BABEL_8_BREAKING ? ^7.14.1 : ^5.1.1"
+    lru-cache: "condition:BABEL_8_BREAKING ? ^10.4.0 : ^5.1.1"
     semver: "condition:BABEL_8_BREAKING ? ^7.3.4 : ^6.3.1"
   languageName: unknown
   linkType: soft
@@ -1126,7 +1125,7 @@ __metadata:
     "@types/fs-readdir-recursive": "npm:^1.1.0"
     fs-readdir-recursive: "npm:^1.1.0"
     jest-diff: "npm:^29.6.4"
-    lru-cache: "condition:BABEL_8_BREAKING ? ^7.14.1 : ^5.1.1"
+    lru-cache: "condition:BABEL_8_BREAKING ? ^10.4.0 : ^5.1.1"
     make-dir: "npm:^2.1.0"
   languageName: unknown
   linkType: soft
@@ -5532,13 +5531,6 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: 10/4e5aed58cabb2bbf6f725da13421aa50a49abb6bc17bfab6c31b8774b073fa7b50d557c61f961a09a85f6056151190f8ac95f13f5b48136ba5841f7d4484ec56
-  languageName: node
-  linkType: hard
-
-"@types/lru-cache@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "@types/lru-cache@npm:5.1.1"
-  checksum: 10/0afadefc983306684a8ef95b6337a0d9e3f687e7e89e1f1f3f2e1ce3fbab5b018bb84cf277d781f871175a2c8f0176762b69e58b6f4296ee1b816cea94d5ef06
   languageName: node
   linkType: hard
 
@@ -13007,20 +12999,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lru-cache-BABEL_8_BREAKING-true@npm:lru-cache@^7.14.1":
-  version: 7.14.1
-  resolution: "lru-cache@npm:7.14.1"
-  checksum: 10/f29a86e9eb3fac3dd2f41c218f6e5b1668786a9ab12d095525994cf1072ad66d0850a41957b6b5da1aea6209c691a1b2bc14e5111467e97112bbf2323d680df2
+"lru-cache-BABEL_8_BREAKING-true@npm:lru-cache@^10.4.0":
+  version: 10.4.3
+  resolution: "lru-cache@npm:10.4.3"
+  checksum: 10/e6e90267360476720fa8e83cc168aa2bf0311f3f2eea20a6ba78b90a885ae72071d9db132f40fda4129c803e7dcec3a6b6a6fbb44ca90b081630b810b5d6a41a
   languageName: node
   linkType: hard
 
-"lru-cache@condition:BABEL_8_BREAKING ? ^7.14.1 : ^5.1.1":
-  version: 0.0.0-condition-45017e
-  resolution: "lru-cache@condition:BABEL_8_BREAKING?^7.14.1:^5.1.1#45017e"
+"lru-cache@condition:BABEL_8_BREAKING ? ^10.4.0 : ^5.1.1":
+  version: 0.0.0-condition-d46a26
+  resolution: "lru-cache@condition:BABEL_8_BREAKING?^10.4.0:^5.1.1#d46a26"
   dependencies:
     lru-cache-BABEL_8_BREAKING-false: "npm:lru-cache@^5.1.1"
-    lru-cache-BABEL_8_BREAKING-true: "npm:lru-cache@^7.14.1"
-  checksum: 10/b2df7ded6a1bc3f519a73e8723c066009079b593ba3efd35973538be5680e103c0690d544501f54bb231750e48e13ede6622a8fe4525397fba7526f8417cb63b
+    lru-cache-BABEL_8_BREAKING-true: "npm:lru-cache@^10.4.0"
+  checksum: 10/882bb8075ca2e45957f4f651de79fa364be0bf191a5d5451b7656ce0b56469b04379683271d2b45ea2a322c18dc13e97ea1f80e6947d58eac4f0dda0e02dfdb7
   languageName: node
   linkType: hard
 

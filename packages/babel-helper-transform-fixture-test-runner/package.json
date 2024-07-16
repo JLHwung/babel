@@ -22,7 +22,7 @@
     "@jridgewell/trace-mapping": "^0.3.25",
     "fs-readdir-recursive": "^1.1.0",
     "jest-diff": "^29.6.4",
-    "lru-cache": "condition:BABEL_8_BREAKING ? ^7.14.1 : ^5.1.1",
+    "lru-cache": "condition:BABEL_8_BREAKING ? ^10.4.0 : ^5.1.1",
     "make-dir": "^2.1.0"
   },
   "devDependencies": {
