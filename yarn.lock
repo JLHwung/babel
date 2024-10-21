@@ -479,6 +479,7 @@ __metadata:
   dependencies:
     "@babel/core": "workspace:^"
     "@babel/eslint-parser": "workspace:^"
+    "@babel/preset-flow": "workspace:^"
     "@babel/preset-react": "workspace:^"
     "@eslint/compat": "npm:^1.1.1"
     dedent: "npm:^1.5.3"
@@ -1205,6 +1206,7 @@ __metadata:
     "@babel/core": "workspace:^"
     "@babel/helper-transform-fixture-test-runner": "workspace:^"
     "@babel/preset-env": "workspace:^"
+    "@babel/preset-react": "workspace:^"
     "@babel/register": "workspace:^"
     "@babel/runtime": "workspace:^"
     "@types/v8flags": "npm:^3.1.1"
