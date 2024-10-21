@@ -1,3 +1,3 @@
 module.exports = () => ({
-  presets: [["../../../..", { development: true, runtime: "classic" }]],
+  presets: [["../../../../lib/index.js", { development: true, runtime: "classic" }]],
 });
