@@ -233,7 +233,7 @@ export function insertAfter<Nodes extends NodeOrNodeList<t.Node>>(
         ).insertAfter(nodes);
         // todo: this cast is unsound, we wrap nodes in the IIFE but never unwrap them in the return values.
         // consider just returning the insertAfter result.
-        return [self] as NodePaths<Nodes>;
+        return [self] as unknown as NodePaths<Nodes>;
       }
 
       if (isHiddenInSequenceExpression(self)) {
