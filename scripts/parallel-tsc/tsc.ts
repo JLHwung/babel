@@ -15,7 +15,11 @@ import JSON5 from "json5";
 import { setTimeout } from "node:timers/promises";
 import { glob } from "node:fs/promises";
 
-const tscPath = require.resolve("typescript/lib/tsc.js");
+// The package exports of TypeScript 7 do not include its CLI entry point
+const tscPath = joinPath(
+  dirname(require.resolve("typescript7/package.json")),
+  "lib/tsc.js"
+);
 
 const entryProjectsPaths = new Set(
   process.argv.slice(2).map(project => resolvePath(process.cwd(), project))

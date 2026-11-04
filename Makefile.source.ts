@@ -79,6 +79,11 @@ function node(args: string[], cwd?: string, inheritStdio?: boolean) {
   return exec(NODE_PATH, args, cwd, inheritStdio);
 }
 
+// `yarn tsc` is TypeScript 6, which is still used by typescript-eslint and tstyche
+function tsc(args: string[]) {
+  return node(["node_modules/typescript7/bin/tsc", ...args]);
+}
+
 function env(fun: () => void, env: NodeJS.ProcessEnv) {
   const envBak = process.env;
   process.env = { ...envBak, ...env };
@@ -303,7 +308,7 @@ target["bundle-babel-parser-dts"] = function () {
 target["prepublish-prepare-dts-no-clean"] = function () {
   yarn(["gulp", "bundle-dts"]);
   target["build-typescript-legacy-typings"]();
-  yarn(["tsc", "-p", "tsconfig.dts-bundles.json"]);
+  tsc(["-p", "tsconfig.dts-bundles.json"]);
 };
 
 target["watch-perf"] = function () {
@@ -331,7 +336,7 @@ target["tscheck-babel-parser"] = function () {
 };
 
 target["tscheck-helpers"] = function () {
-  yarn(["tsc", "-p", "./packages/babel-helpers/src/helpers/tsconfig.json"]);
+  tsc(["-p", "./packages/babel-helpers/src/helpers/tsconfig.json"]);
 };
 
 target["clean-ts"] = function () {

@@ -36,9 +36,6 @@ type LValAncestor =
     };
 //# sourceMappingURL=bind-operator-errors.d.ts.map
 
-type Accessibility = "public" | "protected" | "private";
-type VarianceAnnotations = "in" | "out";
-
 type Plugin$1 =
   | "asyncDoExpressions"
   | "decorators"
@@ -92,6 +89,9 @@ interface TypeScriptPluginOptions {
   dts?: boolean;
   disallowAmbiguousJSXLike?: boolean;
 }
+
+type Accessibility = "public" | "protected" | "private";
+type VarianceAnnotations = "in" | "out";
 
 type TsModifier =
   | "readonly"
@@ -281,8 +281,8 @@ type ErrorInfoCompressed = {
   PipeUnparenthesizedBody: [
     {
       type:
-        | "AssignmentExpression"
         | "ArrowFunctionExpression"
+        | "AssignmentExpression"
         | "ConditionalExpression"
         | "YieldExpression";
     },

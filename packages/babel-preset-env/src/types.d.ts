@@ -21,6 +21,10 @@ export type CorejsOption =
 export type PluginListItem = string | RegExp;
 export type PluginListOption = PluginListItem[];
 
+export type PresetTargets = {
+  esmodules?: boolean;
+} & InputTargets;
+
 export type Options = {
   configPath?: string;
   debug?: boolean;
@@ -30,9 +34,7 @@ export type Options = {
   include?: PluginListOption;
   modules?: ModuleOption;
   shippedProposals?: boolean;
-  targets?: {
-    esmodules?: boolean;
-  } & InputTargets;
+  targets?: PresetTargets;
   browserslistEnv?: string;
 };
 
