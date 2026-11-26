@@ -30,7 +30,8 @@
     "@babel/plugin-transform-arrow-functions": "workspace:^",
     "@babel/plugin-transform-modules-commonjs": "workspace:^",
     "@babel/preset-typescript": "workspace:^",
-    "@types/cacache": "^20.0.0"
+    "@types/cacache": "^20.0.0",
+    "convert-source-map": "catalog:"
   },
   "homepage": "https://babel.dev/docs/en/next/babel-register",
   "bugs": "https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22pkg%3A%20register%22+is%3Aopen",

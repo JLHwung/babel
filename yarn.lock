@@ -3931,6 +3931,7 @@ __metadata:
     "@types/cacache": "npm:^20.0.0"
     cacache: "npm:20.0.3"
     clone-deep: "npm:^4.0.1"
+    convert-source-map: "catalog:"
     empathic: "catalog:"
     pirates: "npm:^4.0.6"
   peerDependencies:
@@ -12400,7 +12401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-light-runner@npm:^0.7.12":
+"jest-light-runner@npm:0.7.12":
   version: 0.7.12
   resolution: "jest-light-runner@npm:0.7.12"
   dependencies:
@@ -12416,6 +12417,25 @@ __metadata:
   peerDependencies:
     jest: ^27.5.0 || ^28.0.0 || ^29.0.0|| ^30.0.0
   checksum: 10/a0baf5a048b27738f504da7fe737797c13d642c37294afc699dfed20037531155656a5276631a3a733299b9f5f13e81883ba6e874a5629adc7c2eabca88350e3
+  languageName: node
+  linkType: hard
+
+"jest-light-runner@patch:jest-light-runner@npm%3A0.7.12#~/.yarn/patches/jest-light-runner-npm-0.7.12-5ba458cf02.patch":
+  version: 0.7.12
+  resolution: "jest-light-runner@patch:jest-light-runner@npm%3A0.7.12#~/.yarn/patches/jest-light-runner-npm-0.7.12-5ba458cf02.patch::version=0.7.12&hash=64a19a"
+  dependencies:
+    "@jest/expect": "npm:^30.4.1"
+    "@jest/fake-timers": "npm:^30.4.1"
+    jest-circus: "npm:^30.4.1"
+    jest-each: "npm:^30.4.1"
+    jest-mock: "npm:^30.4.1"
+    jest-snapshot: "npm:^30.4.1"
+    p-limit: "npm:^6.2.0"
+    supports-color: "npm:^9.2.1"
+    tinypool: "npm:0.8.4"
+  peerDependencies:
+    jest: ^27.5.0 || ^28.0.0 || ^29.0.0|| ^30.0.0
+  checksum: 10/e2374e77fd6c2f621b8ed5024d0d1dd373f215ab06109629b8c5980f3b24da866f72bd5eb49f627b9c631aabfa3bcc89268d6c8f3e251c31c6fb04e0782b9bf3
   languageName: node
   linkType: hard
 

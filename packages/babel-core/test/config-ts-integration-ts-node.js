@@ -135,7 +135,7 @@ describe("@babel/core config ts-node integration", () => {
   let service;
   beforeAll(() => {
     service = require("ts-node").register({
-      experimentalResolver: true,
+      experimentalResolver: !process.versions.pnp,
       compilerOptions: {
         module: "CommonJS",
       },

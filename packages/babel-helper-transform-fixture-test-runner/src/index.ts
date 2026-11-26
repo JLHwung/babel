@@ -870,7 +870,11 @@ export function buildProcessTests(
               ...process.env,
               FORCE_COLOR: "false",
               ...(parseInt(process.versions.node) >= 22 && {
-                NODE_OPTIONS: "--disable-warning=ExperimentalWarning",
+                // Keep the inherited options: under Yarn PnP they contain
+                // the --require/--loader flags that resolve dependencies.
+                NODE_OPTIONS:
+                  "--disable-warning=ExperimentalWarning " +
+                  (process.env.NODE_OPTIONS || ""),
               }),
               ...opts.env,
             };

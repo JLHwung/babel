@@ -1,0 +1,15 @@
+diff --git a/src/global-setup.js b/src/global-setup.js
+index 280cc5108599d25a9a185d51dc6ee26c3684d56e..ceddf3987ee0f32c715b38caa13a962c0ece113a 100644
+--- a/src/global-setup.js
++++ b/src/global-setup.js
+@@ -21,8 +21,8 @@ const jest = {
+   clearAllMocks: jestMock.clearAllMocks.bind(jestMock),
+   resetAllMocks: jestMock.resetAllMocks.bind(jestMock),
+   restoreAllMocks: jestMock.restoreAllMocks.bind(jestMock),
+-  useFakeTimers() {
+-    jestTimer.useFakeTimers();
++  useFakeTimers(fakeTimersConfig) {
++    jestTimer.useFakeTimers(fakeTimersConfig);
+     return jest;
+   },
+   setSystemTime(time) {

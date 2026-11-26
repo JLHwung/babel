@@ -20,6 +20,18 @@ function expectError(run) {
     // Remove absolute URLs
     stack = replaceAll(stack, process.cwd().replace(/\\/g, "/"), "<CWD>");
     stack = stack.replace(/file:\/\/\/?<CWD>/g, "<CWD>");
+    // Yarn PnP: map files inside zip archives (in the global cache or behind
+    // a __virtual__ path) to node_modules, and drop the frames of its
+    // require hook (it calls the original Module._load anonymously).
+    stack = stack.replace(
+      /[^\s()]+\.zip\/node_modules\//g,
+      "<CWD>/node_modules/",
+    );
+    stack = stack.replace(/\n\s*at [^\n]+\.pnp\.cjs:\d+:\d+\)?(?=\n|$)/g, "");
+    stack = stack.replace(
+      /\bat Module\.<anonymous> \((node:internal\/modules\/cjs\/loader)/g,
+      "at Module._load ($1",
+    );
     // Remove jest-related stack frames.
     // The `at async Promise.all` frame comes from inside jest-light-runner and is only
     // visible when using --run-in-band, comes from inside jest but doesn't have an

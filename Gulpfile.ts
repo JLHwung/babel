@@ -8,7 +8,11 @@ import { callbackify } from "node:util";
 import { styleText } from "node:util";
 // @ts-expect-error no types
 import gulp from "gulp";
-import { rollup, type InputPluginOption } from "rollup";
+import {
+  rollup,
+  type InputPluginOption,
+  type Plugin as RollupPlugin,
+} from "rollup";
 import {
   babel as rollupBabel,
   getBabelOutputPlugin,
@@ -321,6 +325,57 @@ function resolveChain(baseUrl: string, ...packages: string[]) {
   );
 }
 
+/**
+ * regexpu-core loads its Unicode data with a template-literal require:
+ * https://github.com/mathiasbynens/regexpu-core/blob/ffd8fff2e31f4597f6fdfee75d5ac1c5c8111ec3/rewrite-pattern.js#L48
+ * Replace it with a switch over static requires of every data file, so that
+ * bundling does not depend on where the package lives on disk (with Yarn PnP
+ * it is a zip archive in the global cache, outside of the repository).
+ */
+function rollupRegexpuStaticRequires(): RollupPlugin {
+  const pkgDir = resolveChain(
+    import.meta.url,
+    "./packages/babel-helper-create-regexp-features-plugin",
+    "regexpu-core",
+    "regenerate-unicode-properties"
+  );
+  const files: string[] = [];
+  (function walk(dir: string) {
+    for (const entry of fs.readdirSync(path.join(pkgDir, dir), {
+      withFileTypes: true,
+    })) {
+      const rel = dir ? `${dir}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) walk(rel);
+      else if (rel.includes("/") && rel.endsWith(".js")) files.push(rel);
+    }
+  })("");
+  files.sort();
+
+  const dynamicRequire =
+    "require(`regenerate-unicode-properties/${ path }.js`)";
+  return {
+    name: "babel-regexpu-static-requires",
+    transform(code, id) {
+      if (!/[\\/]regexpu-core[\\/]rewrite-pattern\.js$/.test(id)) return;
+      if (!code.includes(dynamicRequire)) {
+        throw new Error(
+          `${id}: the regenerate-unicode-properties require changed`
+        );
+      }
+      const cases = files
+        .map(
+          f =>
+            `case ${JSON.stringify(f.slice(0, -3))}: return require(${JSON.stringify(`regenerate-unicode-properties/${f}`)});`
+        )
+        .join("\n    ");
+      return (
+        code.replace(dynamicRequire, "__requireUnicodeProperty(path)") +
+        `\nfunction __requireUnicodeProperty(path) {\n  switch (path) {\n    ${cases}\n  }\n  throw new Error("Cannot find module 'regenerate-unicode-properties/" + path + ".js'");\n}\n`
+      );
+    },
+  };
+}
+
 // If this build is part of a pull request, include the pull request number in
 // the version number.
 let versionSuffix = "";
@@ -434,6 +489,7 @@ function buildRollup(packages: PackageInfo[], buildStandalone?: boolean) {
           },
           plugins: [
             buildStandalone && rollupStandaloneInternals(),
+            buildStandalone && rollupRegexpuStaticRequires(),
             rollupBabelSource(),
             process.env.STRIP_BABEL_VERSION_FLAG &&
               rollupDependencyCondition(bool(process.env.BABEL_9_BREAKING)),
@@ -464,22 +520,6 @@ function buildRollup(packages: PackageInfo[], buildStandalone?: boolean) {
                 "packages/babel-compat-data/scripts/data/legacy-plugin-aliases.js",
                 "packages/*/src/**/*.cjs",
               ],
-              dynamicRequireTargets: buildStandalone
-                ? [
-                    // https://github.com/mathiasbynens/regexpu-core/blob/ffd8fff2e31f4597f6fdfee75d5ac1c5c8111ec3/rewrite-pattern.js#L48
-                    path
-                      .relative(
-                        monorepoRoot,
-                        resolveChain(
-                          import.meta.url,
-                          "./packages/babel-helper-create-regexp-features-plugin",
-                          "regexpu-core",
-                          "regenerate-unicode-properties"
-                        )
-                      )
-                      .replace(/\\/g, "/") + "/**/*.js", // Must be posix path in rollup 3
-                  ]
-                : undefined,
               // Never delegate to the native require()
               ignoreDynamicRequires: false,
               // Align with the Node.js behavior
